@@ -37,9 +37,9 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.isAuthenticated = true;
         },
-        updateUserId: (state, action) => {
-            state.user.userId = action.payload;
-        },
+        // updateUserId: (state, action) => {
+        //     state.user.userId = action.payload;
+        // },
         logout: (state) => {
             state.user = null;
             state.isAuthenticated = false;

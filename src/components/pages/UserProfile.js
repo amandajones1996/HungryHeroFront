@@ -14,7 +14,17 @@ function UserProfile() {
 
     // console.log("userId:", user.userId)
 
-    const getUserOrders = useCallback(async (userId) => {
+    
+    useEffect(() => {
+        // Fetch user's orders if the user is logged in
+        // if (user) {
+        //     getUserOrders(user.userId);
+        // }
+
+        getUserOrders(user.userId)
+    }, []);
+
+    const getUserOrders = async (userId) => {
         try {
             const response = await axios.get(`http://127.0.0.1:8080/users/${userId}`);
             const userWithOrders = response.data;
@@ -24,14 +34,7 @@ function UserProfile() {
         } catch (error) {
             console.error("Error fetching user orders:", error.message);
         }
-    }, [dispatch]);
-
-    useEffect(() => {
-        // Fetch user's orders if the user is logged in
-        if (user) {
-            getUserOrders(user.userId);
-        }
-    }, [user, getUserOrders]);
+    };
 
     const handleLogout = () => {
         dispatch(logout());
