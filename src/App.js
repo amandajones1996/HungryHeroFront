@@ -4,6 +4,7 @@ import Restaurant from './components/pages/Restaurant';
 import Home from './components/pages/Home';
 // import UserProfile from "./components/pages/UserProfile";
 import Login from "./components/pages/Login";
+import UserProfile from './components/pages/UserProfile';
 // import { useSelector } from "react-redux";
 // import { selectIsAuthenticated } from "./features/authSlice";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/restaurants' element={<Restaurant />} />
         <Route path='/login' element={<Login />} />
+            <Route path='/profile' element={<UserProfile />} />
       </Routes>
     </>
   );
