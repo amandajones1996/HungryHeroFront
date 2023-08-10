@@ -37,9 +37,6 @@ const authSlice = createSlice({
             state.user = action.payload;
             state.isAuthenticated = true;
         },
-        // updateUserId: (state, action) => {
-        //     state.user.userId = action.payload;
-        // },
         logout: (state) => {
             state.user = null;
             state.isAuthenticated = false;
@@ -47,10 +44,13 @@ const authSlice = createSlice({
         updateUserOrders: (state, action) => {
             state.user.orders = action.payload;
         },
+        setTotalOrders: (state, action) => {
+            state.totalOrders = action.payload;
+        },
     },
 });
 
-export const { login, updateUserId, logout, updateUserOrders } = authSlice.actions;
+export const { login, logout, updateUserOrders, setTotalOrders } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;

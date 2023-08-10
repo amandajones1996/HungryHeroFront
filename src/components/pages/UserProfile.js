@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectIsAuthenticated, logout, updateUserOrders } from "../../features/authSlice"; 
+import { selectUser, selectIsAuthenticated, logout, updateUserOrders, setTotalOrders } from "../../features/authSlice"; 
 import axios from "axios";
 import { useEffect } from "react";
-import { useCallback } from "react";
+
 
 
 function UserProfile() {
@@ -31,6 +31,10 @@ function UserProfile() {
             console.log("usersOrders:", userWithOrders)
             // Dispatch the updateUserOrders action to update the user's orders in the store
             dispatch(updateUserOrders(userWithOrders.orders));
+
+            // Set total orders in the Redux store
+            dispatch(setTotalOrders(userWithOrders.orders.length));
+
         } catch (error) {
             console.error("Error fetching user orders:", error.message);
         }
@@ -50,13 +54,16 @@ function UserProfile() {
             <p>Welcome, {user.email}!</p>
             {user.orders && user.orders.length > 0 ? (
                 <div>
-                    <h3>Order History</h3>
+                    <h3>Subscription History</h3>
+                    <p>Active Subscriptions: {user.orders.length}</p>
                     <ul>
-                        {user.orders.map(order => (
+                        {user.orders.map((order, index) => (
                             <li key={order.orderId}>
+                                <p>Order Number: {index + 1}</p> 
                                 <p>Restaurant: {order.restaurant}</p>
                                 <p>Food Order: {order.foodOrder}</p>
-                                {/* Display other order details */}
+                                <p>Delivery Frequency: {order.deliveryFrequency}</p>
+                                <p>Total Cost {order.deliveryFrequency}: ${order.totalAmount}</p>
                             </li>
                         ))}
                     </ul>
