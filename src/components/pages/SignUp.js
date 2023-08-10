@@ -11,6 +11,14 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [signupSuccess, setSignupSuccess] = useState(false);
     const [error, setError] = useState(null);
+     // State to track whether to show login or signup form
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    // Function to toggle between login and signup forms
+    const toggleForm = () => {
+        setShowSignUp(!showSignUp);
+        navigate("/login")
+    };
     
 
     const handleSignup = async (e) => {
@@ -77,6 +85,8 @@ function SignUp() {
                     </div>
                     {error && <p style={{ color: "red" }}>{error}</p>}
                     <button type="submit">Sign Up</button>
+                    <br></br>
+                    <button onClick={toggleForm}>Switch to {showSignUp ? 'Sign Up' : 'Login'}</button>
                 </form>
             )}
         </div>

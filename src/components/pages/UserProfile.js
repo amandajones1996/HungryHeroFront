@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser, selectIsAuthenticated, logout, updateUserOrders, setTotalOrders } from "../../features/authSlice"; 
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 function UserProfile() {
+    const navigate = useNavigate();
     const user = useSelector(selectUser);
     const isAuthenticated = useSelector(selectIsAuthenticated);
     const dispatch = useDispatch();
@@ -14,14 +16,16 @@ function UserProfile() {
 
     // console.log("userId:", user.userId)
 
-    
     useEffect(() => {
-        // Fetch user's orders if the user is logged in
-        // if (user) {
-        //     getUserOrders(user.userId);
-        // }
+        if (!isAuthenticated || !user) {
+            navigate('/'); 
+        }
+    }, [isAuthenticated, user]);
 
+    useEffect(() => {
+        if (user && user.userId){
         getUserOrders(user.userId)
+        }
     }, []);
 
     const getUserOrders = async (userId) => {
@@ -46,7 +50,9 @@ function UserProfile() {
 
     if (!isAuthenticated || !user) {
         // Loading or not authenticated
-        return <p>Please log in to access this page.</p>;
+        // navigate("/");
+        return null;
+        // return <p>Please log in to access this page.</p>;
     }
     // console.log("users order", user.order)
     return (

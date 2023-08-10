@@ -11,7 +11,17 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    
 
+     // State to track whether to show login or signup form
+    const [showSignUp, setShowSignUp] = useState(false);
+
+    // Function to toggle between login and signup forms
+    const toggleForm = () => {
+        setShowSignUp(!showSignUp);
+        navigate("/signup")
+    };
+    
     const authenticateUser = async (email, password) => {
         const response = await axios.post("http://127.0.0.1:8080/login", { email, password})
 
@@ -75,6 +85,8 @@ function Login() {
             />
         </div>
         <button onClick={handleLogin} type="submit">Login</button>
+        <br></br>
+        <button onClick={toggleForm}>Switch to {showSignUp ? 'Login' : 'Sign Up'}</button>
         </form>
     </div>
     );
