@@ -31,7 +31,12 @@ function NavBar() {
 
     return (
         <nav className="navbar">
-            <div className="navbar-logo">Hungry Hero</div>
+            <div className="navbar-logo">
+            <Link to="/">Hungry Hero</Link>
+            </div>
+            <div>
+            <Link to="/restaurants">Explore our Restaurant Partners</Link>
+            </div>
             <div className="navbar-profile">
                 <div className="profile-icon" onClick={toggleDropdown}>
                     <img src={userIcon} alt="User Icon" className="user-icon" />
