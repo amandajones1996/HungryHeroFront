@@ -49,6 +49,8 @@ const Subscription = () => {
             
             
             stripeCheckout.addEventListener("unload", () => getCustomerPaymentId(customerInfo.customerId));
+
+            const subscriptionInfo = await handleStripeCheckout(customerInfo.customerId)
         
         }
     
@@ -82,13 +84,13 @@ const Subscription = () => {
             let amount = 0;
             switch (selectedFrequency) {
             case 'weekly':
-                amount = 5000;
+                amount = 50;
                 break;
             case 'biweekly':
-                amount = 1500;
+                amount = 50;
                 break;
             case 'monthly':
-                amount = 2000;
+                amount = 50;
                 break;
             default:
                 break;
@@ -108,11 +110,10 @@ const Subscription = () => {
             const response = await axios.get(`http://127.0.0.1:8080/stripe/get-customer/${customerId}`);
             const paymentMethodId = response.data;
             if (paymentMethodId) {
-                // Do something with the payment method ID
+                
                 console.log('Default Payment Method ID:', paymentMethodId);
 
-                // Redirect to the profile page
-                navigate("/profile");
+                // navigate("/profile");
             } else {
                 console.log('No default payment method found.');
             }
@@ -120,6 +121,27 @@ const Subscription = () => {
             console.error('Error fetching default payment method:', error);
         }
     };
+
+    const handleStripeCheckout = async (customerId) => {
+        try {
+            const response = await axios.post("http://127.0.0.1:8080/stripe/create-subscription", {
+                customerId: customerId, 
+                items: ['price_1NeJB7LWbHJdhU8K9NrIU110'], 
+                defaultPaymentMethod: 'pm_1NeOF8LWbHJdhU8KceF6qJ4q' 
+            });
+
+            console.log(response.data); 
+
+    
+            if (response.status === 200) {
+                navigate('/delivery'); 
+            }
+        } catch (error) {
+            console.error('Error creating subscription:', error);
+            
+        }
+    };
+
 
 
 
