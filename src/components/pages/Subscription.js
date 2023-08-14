@@ -53,7 +53,7 @@ const Subscription = () => {
             }
         
 
-            window.open("https://buy.stripe.com/test_bIY9Cgctv4C3goM6oo", "_blank");
+            const stripeCheckout = window.open("https://buy.stripe.com/test_bIY9Cgctv4C3goM6oo", "_blank");
             
             try {
             const subscriptionInfo = await getCustomerPaymentId(customerInfo.customerId)

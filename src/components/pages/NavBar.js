@@ -15,7 +15,7 @@ function NavBar() {
     const isAuthenticated = useSelector(selectIsAuthenticated);
     const dispatch = useDispatch();
     const [dropdownVisible, setDropdownVisible] = useState(false);
-
+    
     const handleLogout = () => {
         dispatch(logout());
         navigate('/');
@@ -28,6 +28,7 @@ function NavBar() {
     const closeDropdown = () => {
         setDropdownVisible(false);
     };
+
 
     return (
         <nav className="navbar">

@@ -14,7 +14,6 @@ function App() {
   return (
     <>
       <NavBar />
-      <Link to="/delivery">delivery</Link>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/restaurants/:restaurantId" element={<Restaurant />} />

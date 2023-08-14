@@ -106,8 +106,9 @@ function Delivery() {
             {deliveryResponse && (
             <div>
                 <h3>Delivery Information:</h3>
-                <p>External Delivery ID: {deliveryResponse.external_delivery_id}</p>
-                <p>Currency: {deliveryResponse.currency}</p>
+                <p>Delivery Fee of $9.75 will be charged to your subscription.</p>
+                {/* <p>External Delivery ID: {deliveryResponse.external_delivery_id}</p> */}
+                {/* <p>Currency: {deliveryResponse.currency}</p> */}
                 <p>Delivery Status: {deliveryResponse.delivery_status}</p>
                 {/* Display other relevant properties */}
             </div>
