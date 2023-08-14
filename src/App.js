@@ -17,7 +17,7 @@ function App() {
       <Link to="/delivery">delivery</Link>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/restaurants/:name" element={<Restaurant />} />
+        <Route path="/restaurants/:restaurantId" element={<Restaurant />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<UserProfile />} />

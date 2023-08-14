@@ -5,7 +5,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: lightblue;
     color: white;
     text-decoration: none;
     transition: color 0.3s;
@@ -43,11 +42,11 @@
 /* user icon */
 .icon-container {
     position: absolute;
-    top: 10px; /* Adjust the top value as needed */
-    right: 10px; /* Adjust the right value as needed */
+    top: 10px; 
+    right: 10px; 
 }
 
 .user-icon {
-    width: 30px; /* Adjust to your preferred width */
-    height: 30px; /* Adjust to your preferred height */
+    width: 50px; /* Adjust to your preferred width */
+    height: 50px; /* Adjust to your preferred height */
 }

@@ -2,37 +2,50 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../features/authSlice";
+import { selectRestaurant } from '../../features/restaurantSlice';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 
 const Subscription = () => {
-    // const user = useSelector(selectUser);
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [price, setPrice] = useState('');
     const [currency, setCurrency] = useState('USD'); 
     const [setupIntentId, setSetupIntentId] = useState('');
     const [selectedFrequency, setSelectedFrequency] = useState('monthly')
     const user = useSelector(state => state.auth.user);
+    const restaurantId = useParams().restaurantId;
+    // const restaurant = useSelector(state => state.restaurant.restaurantData[restaurantId])
+    // const restaurant = useSelector(state => state.restaurant.restaurantData);
+    // const user = useSelector(selectUser)
+    // const restaurant = useSelector(selectRestaurant);
+    const [subscriptionResponse, setSubscriptionResponse] = useState("");
+    const restaurant = useSelector(state => state.restaurant.restaurantData[restaurantId]);
     
     const priceMapping = {
         weekly: '$50.00',
-        biweekly: '$75.00',
-        monthly: '$100.00',
+        biweekly: '$50.00',
+        monthly: '$50.00',
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Create customer on Stripe
+        if (!user) {
+            navigate('/login');
+            return;
+        } else { 
+            // console.log('Restaurant:', restaurant);
+            // console.log('Menu:', restaurant.menu);
+        
         const customerInfo = await createStripeCustomer({ email, name });
 
-        // Use the returned customerId for further actions, e.g., creating a subscription
-        console.log('Customer created:', customerInfo.customerId);
+        
+        console.log('Customer object:', customerInfo);
+        console.log('Customer id:', customerInfo.customerId);
 
         if (customerInfo && customerInfo.customerId) {
-            // Call createSetupIntent using the customer ID
+
             const setupIntentInfo = await createSetupIntent(customerInfo.customerId);
             if (setupIntentInfo && setupIntentInfo.setupIntentId) {
                 setSetupIntentId(setupIntentInfo.setupIntentId);
@@ -43,20 +56,40 @@ const Subscription = () => {
             if (paymentIntentInfo) {
                 console.log('PaymentIntent created:', paymentIntentInfo);
             }
+        
 
             const stripeCheckout = window.open("https://buy.stripe.com/test_bIY9Cgctv4C3goM6oo", "_blank");
-            
-            
-            
             stripeCheckout.addEventListener("unload", () => getCustomerPaymentId(customerInfo.customerId));
+            try {
+            const subscriptionInfo = await getCustomerPaymentId(customerInfo.customerId)
+            if (!subscriptionInfo) {
+                setSubscriptionResponse("Subscription successful!");
+                } else {
+                setSubscriptionResponse("Error subscribing. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error subscribing:", error);
+                setSubscriptionResponse("Error subscribing. Please try again.");
+            }
 
-            const subscriptionInfo = await handleStripeCheckout(customerInfo.customerId)
-        
-        }
+            // const orderResponse = await axios.post("http://127.0.0.1:8080/orders", {
+            //     restaurant: restaurant.name,
+            //     foodOrder: restaurant.menu.join(', '),
+            //     deliveryFrequency: selectedFrequency,
+            //     totalAmount: 50.0, 
+            //     userId: user.userId, 
+            
+            // });
+            
+            // // console.log("POST new orders response", orderResponse.data);
     
-    // Clear the form fields after submission
-    setName('');
-    setEmail('');
+            // if (orderResponse.orderId) {
+            //     navigate('/delivery'); 
+            //     }
+            // }
+        }
+        setName('');
+        setEmail('');
     };
 
     const createStripeCustomer = async (customerData) => {
@@ -107,15 +140,18 @@ const Subscription = () => {
     
     const getCustomerPaymentId = async (customerId) => {
         try {
+            console.log(customerId)
             const response = await axios.get(`http://127.0.0.1:8080/stripe/get-customer/${customerId}`);
             const paymentMethodId = response.data;
+            console.log(paymentMethodId)
             if (paymentMethodId) {
                 
                 console.log('Default Payment Method ID:', paymentMethodId);
 
                 // navigate("/profile");
             } else {
-                console.log('No default payment method found.');
+                // console.log('No default payment method found.');
+                console.log(response)
             }
         } catch (error) {
             console.error('Error fetching default payment method:', error);
@@ -148,6 +184,7 @@ const Subscription = () => {
     return (
         <div>
         <h2>Subscribe to a Plan</h2>
+        {subscriptionResponse && <p>{subscriptionResponse}</p>}
         <form onSubmit={handleSubmit}>
             <p>Selected Price: {priceMapping[selectedFrequency]}</p>
             <select

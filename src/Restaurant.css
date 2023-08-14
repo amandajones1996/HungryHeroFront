@@ -1,0 +1,30 @@
+/* ENTRY COMPONENT CSS */
+
+.entryrestaurants {
+    display: flex;
+    justify-content: center;
+}
+
+.entryrestaurantsimg {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.infoContainer {
+    /* display: flex;
+    justify-content: center; */
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    color: rgb(227, 115, 131);
+}
+
+.destination {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    font-weight: bold;
+}
