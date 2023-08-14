@@ -4,7 +4,7 @@ import Subscription from "./Subscription";
 import "../../Restaurant.css"
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { loadRestaurant, selectRestaurant } from "../../features/restaurantSlice";
+import { loadRestaurant, getRestaurantData } from "../../features/restaurantSlice";
 
 
 function Restaurant() {
@@ -17,7 +17,7 @@ function Restaurant() {
     // console.log(restaurant)
     const { restaurantId } = useParams();
     const dispatch = useDispatch();
-    const restaurant = useSelector((state) => selectRestaurant(state, restaurantId));
+    const restaurant = useSelector((state) => state.restaurant.restaurantData);
 
     // React.useEffect(() => {
     //     const restaurantId = window.location.pathname.split('/')[2]
@@ -25,14 +25,19 @@ function Restaurant() {
     //     const restaurantObj = data.filter(obj => obj.id === Number(restaurantId))[0]
     //     setRestaurant(restaurantObj)
     // }, [])
-    useEffect(() => {
-        const restaurantObj = data.find(obj => obj.id === Number(restaurantId));
-        console.log("restaurant selected", restaurantObj)
-        if (restaurantObj) {
-            dispatch(loadRestaurant({ restaurantId, restaurantData: restaurantObj }));
-        }
-    }, [dispatch, restaurantId]);
+    // useEffect(() => {
+    //     const restaurantObj = data.find(obj => obj.id === Number(restaurantId));
+    //     console.log("restaurant selected", restaurantObj)
+    //     if (restaurantObj) {
+    //         dispatch(loadRestaurant({ restaurantId, restaurantData: restaurantObj }));
+    //     }
+    // }, [dispatch, restaurantId]);
 
+    useEffect(() => {
+        dispatch(getRestaurantData(restaurantId));
+    }, [])
+
+    console.log("restaurant state", restaurant)
     if (!restaurant) {
         return <div>Loading...</div>; 
     }

@@ -11,10 +11,6 @@
     object-fit: cover;
 }
 
-.infoContainer {
-    /* display: flex;
-    justify-content: center; */
-}
 
 .name {
     display: flex;
@@ -28,3 +24,15 @@
     font-style: italic;
     font-weight: bold;
 }
+
+/* .entriesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} */
+
+/* .entryContainer {
+    width: 48%; 
+    margin-bottom: 20px;
+
+}   */

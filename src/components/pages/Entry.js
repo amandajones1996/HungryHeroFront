@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Entry({ entry }) {
 
 return (
-<div>
+<div className="entriesWrapper">
     <div className="entryContainer">
     <div className="entryrestaurants">
         <div>
@@ -26,7 +26,7 @@ return (
     <div className="infoContainer">
     <h2 className="name">{entry.name}</h2>
         <span className="destination">{entry.location}</span>
-        <p className="description">{entry.description}</p>
+        {/* <p className="description">{entry.description}</p> */}
     </div>
     </div>
     <div></div>

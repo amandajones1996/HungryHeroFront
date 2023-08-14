@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUser } from "../../features/authSlice";
 import { selectRestaurant } from '../../features/restaurantSlice';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from "react-router-dom";
+
 
 
 const Subscription = () => {
@@ -15,13 +16,8 @@ const Subscription = () => {
     const [setupIntentId, setSetupIntentId] = useState('');
     const [selectedFrequency, setSelectedFrequency] = useState('monthly')
     const user = useSelector(state => state.auth.user);
-    const restaurantId = useParams().restaurantId;
-    // const restaurant = useSelector(state => state.restaurant.restaurantData[restaurantId])
-    // const restaurant = useSelector(state => state.restaurant.restaurantData);
-    // const user = useSelector(selectUser)
-    // const restaurant = useSelector(selectRestaurant);
     const [subscriptionResponse, setSubscriptionResponse] = useState("");
-    const restaurant = useSelector(state => state.restaurant.restaurantData[restaurantId]);
+    const restaurant = useSelector(state => state.restaurant.restaurantData);
     
     const priceMapping = {
         weekly: '$50.00',
@@ -35,8 +31,7 @@ const Subscription = () => {
             navigate('/login');
             return;
         } else { 
-            // console.log('Restaurant:', restaurant);
-            // console.log('Menu:', restaurant.menu);
+
         
         const customerInfo = await createStripeCustomer({ email, name });
 
@@ -58,8 +53,8 @@ const Subscription = () => {
             }
         
 
-            const stripeCheckout = window.open("https://buy.stripe.com/test_bIY9Cgctv4C3goM6oo", "_blank");
-            stripeCheckout.addEventListener("unload", () => getCustomerPaymentId(customerInfo.customerId));
+            window.open("https://buy.stripe.com/test_bIY9Cgctv4C3goM6oo", "_blank");
+            
             try {
             const subscriptionInfo = await getCustomerPaymentId(customerInfo.customerId)
             if (!subscriptionInfo) {
@@ -71,22 +66,22 @@ const Subscription = () => {
                 console.error("Error subscribing:", error);
                 setSubscriptionResponse("Error subscribing. Please try again.");
             }
-
-            // const orderResponse = await axios.post("http://127.0.0.1:8080/orders", {
-            //     restaurant: restaurant.name,
-            //     foodOrder: restaurant.menu.join(', '),
-            //     deliveryFrequency: selectedFrequency,
-            //     totalAmount: 50.0, 
-            //     userId: user.userId, 
+            console.log('Restaurant:', restaurant);
+            console.log('Menu:', restaurant.menu);
+            const orderResponse = await axios.post("http://127.0.0.1:8080/orders", {
+                restaurant: restaurant.name,
+                foodOrder: restaurant.menu.join(', '),
+                deliveryFrequency: selectedFrequency,
+                totalAmount: 50.0, 
+                userId: user.userId, 
+            });
             
-            // });
-            
-            // // console.log("POST new orders response", orderResponse.data);
+            console.log("POST new orders response", orderResponse);
     
-            // if (orderResponse.orderId) {
-            //     navigate('/delivery'); 
-            //     }
-            // }
+            if (orderResponse.status === 201) {
+                navigate('/delivery'); 
+                }
+            }
         }
         setName('');
         setEmail('');
@@ -183,6 +178,7 @@ const Subscription = () => {
 
     return (
         <div>
+            hello
         <h2>Subscribe to a Plan</h2>
         {subscriptionResponse && <p>{subscriptionResponse}</p>}
         <form onSubmit={handleSubmit}>
@@ -214,6 +210,5 @@ const Subscription = () => {
         </div>
     );
 };
-
 
 export default Subscription;
