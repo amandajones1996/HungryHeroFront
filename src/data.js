@@ -2,7 +2,7 @@ export default [
     {
         id: 1,
         img: "images123.jpg",
-        name: "Concious Concentrate",
+        name: "Brash",
         location: "New York, NY", 
         description: "Whether escaping to a cabin for the weekend or visiting your in-laws, you can now have your favorite espresso drinks absolutely anywhere you go. Our guarantee: cafe-quality taste.",
         menu: ["Vanilla Oat Milk Latte", "Carmel Oat Milk Latte", "Lavender Oat Milk Latte", "Rose Oat Milk Latte"]

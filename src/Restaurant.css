@@ -9,7 +9,7 @@
     width: 200px;
     height: 150px;
     object-fit: cover;
-}
+} 
 
 
 .name {
@@ -24,15 +24,3 @@
     font-style: italic;
     font-weight: bold;
 }
-
-/* .entriesWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-} */
-
-/* .entryContainer {
-    width: 48%; 
-    margin-bottom: 20px;
-
-}   */

@@ -5,8 +5,10 @@ import { selectUser, selectIsAuthenticated, logout } from "../../features/authSl
 import userIcon from "../../images/userIcon.jpg"; 
 import "../../NavBar.css"
 import { useNavigate } from "react-router-dom";
-
-
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 function NavBar() {
@@ -31,42 +33,40 @@ function NavBar() {
 
 
     return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-            <Link to="/">Hungry Hero</Link>
-            </div>
-            <div>
-            <Link to="/restaurants">Explore our Restaurant Partners</Link>
-            </div>
-            <div className="navbar-profile">
-                <div className="profile-icon" onClick={toggleDropdown}>
-                    <img src={userIcon} alt="User Icon" className="user-icon" />
-                </div>
-                {dropdownVisible && (
-                    <div className="dropdown">
-                        {user ? (
-                            <>
-                                <div className="dropdown-item" onClick={closeDropdown}>
-                                    <Link to="/profile">{user.email}</Link>
-                                </div>
-                                <div className="dropdown-item" onClick={handleLogout}>
+        <Navbar  expand="lg" className="bg-body-tertiary">
+            <Container>
+                <Navbar.Brand href="#home" as={Link} to="/">Hungry Hero</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto" >
+                        <Nav.Link href="#home" as={Link} to="/subscriptionsbenefits">Explore our Subscriptions</Nav.Link>
+                        {/* <Nav.Link href="#link">Link</Nav.Link> */}
+                        <NavDropdown id="basic-nav-dropdown" title="Become a Member">
+                            {user ? (
+                                <>
+                                    <NavDropdown.Item href="#action/3.1" as={Link} to="/profile">Signed in as: {user.email}</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2" onClick={handleLogout}>
                                     Sign Out
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="dropdown-item">
-                                    <Link to="/login">Login</Link>
-                                </div>
-                                <div className="dropdown-item">
-                                    <Link to="/signup">Create Account</Link>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                )}
-            </div>
-        </nav>
+                                    </NavDropdown.Item>
+                                </>
+                            ) : (
+                                <>
+                                    <NavDropdown.Item href="#action/3.1" as={Link} to="/login">Log In</NavDropdown.Item>
+                                    <NavDropdown.Item href="#action/3.2" as={Link} to="/signup">
+                                    Sign Up
+                                    </NavDropdown.Item>
+                                    {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#action/3.4">
+                                    {/* Separated link */}
+                                    </NavDropdown.Item>
+                                </>
+                            )}
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 

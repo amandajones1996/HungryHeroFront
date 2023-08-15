@@ -12,7 +12,9 @@ function Home() {
       <h1 className='homeheaders'>Hungry Hero</h1>
       <h2 className='homeheaders'>Where Hunger is Catered to You -- Not The Other Way Around</h2>
       <br></br>
-      {entryComponents}
+      <div>
+        {entryComponents}
+      </div>
     </div>
 )}
 

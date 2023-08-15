@@ -1,23 +1,21 @@
 
-/* nav bar */
+/* nav bar
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    color: white;
+    padding: 1.5rem;
     text-decoration: none;
     transition: color 0.3s;
+    background-color: rgb(255, 245, 238);
 }
-
 
 .profile-icon {
     width: 30px;
     height: 30px;
-    background-color: lightgray;
     border-radius: 50%;
     cursor: pointer;
-}
+} 
 
 .dropdown {
     position: absolute;
@@ -35,12 +33,12 @@
     color: black;
 }
 
-.dropdown-item:hover {
+/* .dropdown-item:hover {
     background-color: #f0f0f0;
-}
+}  */
 
 /* user icon */
-.icon-container {
+/* .icon-container {
     position: absolute;
     top: 10px; 
     right: 10px; 
@@ -48,5 +46,13 @@
 
 .user-icon {
     width: 50px; /* Adjust to your preferred width */
-    height: 50px; /* Adjust to your preferred height */
+    /* height: 50px; Adjust to your preferred height */
+/* } */
+
+
+.bg-body-tertiary {
+    max-width: fit-content;
+    padding: 0%;
 }
+
+

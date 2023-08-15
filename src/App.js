@@ -7,6 +7,8 @@ import UserProfile from './components/pages/UserProfile';
 import SignUp from './components/pages/SignUp';
 import NavBar from './components/pages/NavBar';
 import Delivery from './components/pages/Delivery';
+// import Subscription from './components/pages/Subscription';
+import SubscriptionsBenefits from './components/pages/SubscriptionsBenefits';
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
     <>
       <NavBar />
       <Routes>
+        <Route path="/subscriptionsbenefits" element={<SubscriptionsBenefits />} />
         <Route path="/" element={<Home />} />
         <Route path="/restaurants/:restaurantId" element={<Restaurant />} />
         <Route path="/signup" element={<SignUp />} />
@@ -22,13 +25,6 @@ function App() {
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/delivery" element={<Delivery />}/>
       </Routes>
-
-      <div>
-        {/* <Home /> */}
-        <nav>
-          {/* <ul>{entryComponents}</ul> */}
-        </nav>
-      </div>
     </>
   );
 }

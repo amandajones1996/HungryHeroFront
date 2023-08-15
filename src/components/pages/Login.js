@@ -4,7 +4,6 @@ import { login } from "../../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
