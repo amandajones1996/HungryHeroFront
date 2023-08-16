@@ -8,14 +8,14 @@ import Image from 'react-bootstrap/Image';
 
 function Entry({ entry }) {
     return (
-            <Col xs={6} md={4} lg={3}>
-                <Card style={{ border: "0" }}>
-                    <Link to={`/restaurants/${entry.id}`}>
+            <Col style={{ maxWidth: "80" }}>
+                <Card style={{ border: "0", backgroundColor: "#000000" }}>
+                    <Link to={`/restaurants/${entry.id}`} className="card-img" style={{ border: "0" }} class="d-flex align-items-center justify-content-center">
                         <Card.Img
                         variant="top"
                         src={require(`../../images/${entry.img}`)}
                         alt={`Attraction in ${entry.location}`}
-                        style={{ height: '350px', objectFit: 'cover', padding: "20px", border: "0" }} 
+                        style={{ height: '350px', objectFit: 'cover', padding: "30px", border: "0", maxWidth: "400px" }} 
                         className="square-image" 
                         />
                     </Link>

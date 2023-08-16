@@ -29,3 +29,11 @@
 #motto {
     font-weight: 100;
 }
+
+.entries {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    /* grid-template-columns: repeat(4, 10vw);
+    grid-gap: 20px; */
+}

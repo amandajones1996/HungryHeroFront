@@ -6,6 +6,9 @@ import { selectUser } from "../../features/authSlice";
 import { selectRestaurant } from '../../features/restaurantSlice';
 import { useNavigate } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 
@@ -26,6 +29,7 @@ const Subscription = () => {
         monthly: '$50.00',
     };
 
+    console.log("freg",selectedFrequency)
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
@@ -181,12 +185,18 @@ const Subscription = () => {
         <Accordion  defaultActiveKey="0" style={{ width: "40vw", padding: "50px", color: '#DB7093' }}>
         <Accordion.Item eventKey="0">
             <div style={{ background: '#DB7093', color: '#DB7093', margin: "0" }}>
-            <Accordion.Header style={{ background: '#DB7093', color: '#DB7093', margin: "0" }}>Subscribe</Accordion.Header>
+            <Accordion.Header style={{ background: '#DB7093', color: '#DB7093', padding: "0" }}>Subscribe</Accordion.Header>
             </div>
-            <Accordion.Body  style={{ backgroundColor: '#ffffff' }}>
+            <Accordion.Body class="d-flex align-items-center justify-content-center"  style={{ backgroundColor: '#ffffff' }}>
         {subscriptionResponse && <p>{subscriptionResponse}</p>}
         <form onSubmit={handleSubmit} style={{ backgroundColor: '#ffffff', color:'#DB7093' }}>
             <p style={{ backgroundColor: '#ffffff' }}>Cost {selectedFrequency}: {priceMapping[selectedFrequency]}</p>
+            {/* <Dropdown style={{backgroundColor: '#ffffff'}}>
+            <p style={{ backgroundColor: '#ffffff' }}>Cost {selectedFrequency}: {priceMapping[selectedFrequency]}</p>
+                <Dropdown.Toggle variant="success" id="dropdown-basic"
+                value={selectedFrequency}
+                onChange={(e) => setSelectedFrequency(e.target.value)}
+                style={{ backgroundColor: '#DB7093', color:'#ffffff' }}>Subscription Frequency</Dropdown.Toggle> */}
             <select
             id="frequency"
             value={selectedFrequency}
@@ -197,13 +207,27 @@ const Subscription = () => {
                 <option value="biweekly">Biweekly</option>
                 <option value="monthly">Monthly</option>
             </select>
+
+{/* 
+                <Dropdown.Menu  id="frequency"
+                value={selectedFrequency}
+                onSelect={(e) => console.log("hi")}
+                style={{ backgroundColor: '#DB7093', color:'#ffffff' }}>
+                    <Dropdown.Item href="#/action-1" value="Weekly"  onSelect={(e) => setSelectedFrequency(e.target.value)}>Weekly</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2" value="Biweekly">Biweekly</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3" value="Monthly">Monthly</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown> */}
+
             <br />
+            <br></br>
             <div style={{ backgroundColor: '#ffffff', color:'#DB7093'}}>
-            <label style={{ backgroundColor: '#ffffff' }}>Name:</label>
+            <label style={{ backgroundColor: '#ffffff' }}>Name: </label>
             <input style={{ backgroundColor: '#ffffff' }} type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter Your Name'/>
             </div>
+            <br></br>
             <div style={{ backgroundColor: '#ffffff' }}>
-            <label style={{ backgroundColor: '#ffffff' }}>Email:</label>
+            <label style={{ backgroundColor: '#ffffff' }}>Email: </label>
             <input
                 type="email"
                 value={email || (user && user.email ? user.email : '')}
@@ -213,7 +237,7 @@ const Subscription = () => {
             />
             </div>
             <br></br>
-            <button style={{ backgroundColor:'#DB7093', color: '#ffffff', border: "10"}} type="submit">Subscribe</button>
+            <Button variant="primary" style={{ backgroundColor:'#DB7093', color: '#ffffff', border: "10" }} type="submit">Subscribe</Button>
         </form>
         </Accordion.Body>
         </Accordion.Item>

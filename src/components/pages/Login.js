@@ -72,7 +72,7 @@ function Login() {
         style={{ display: 'block', position: 'initial', color: '#DB7093' }}
     >
         <Modal.Dialog >
-            <Modal.Header closeButton style={{ backgroundColor: '#ffffff' }}>
+            <Modal.Header style={{ backgroundColor: '#ffffff' }}>
                 <Modal.Title style={{ backgroundColor: '#ffffff', color: '#DB7093' }}>Log In</Modal.Title>
             </Modal.Header>
 
@@ -114,3 +114,4 @@ function Login() {
 }
 
 export default Login;
+
