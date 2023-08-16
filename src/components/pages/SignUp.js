@@ -3,6 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/authSlice";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -36,10 +41,10 @@ function SignUp() {
                 const response = await authenticateUser(email, password);
                 dispatch(login({ email, userId: response.userId })); 
         
-                setTimeout(() => {
-                    // Navigate to the user profile or home page after a delay
-                    navigate("/profile");
-                }, 4000);
+                
+            // Navigate to the user profile or home page after a delay
+            navigate("/profile");
+            
             }
         } catch (error) {
             setError(error.response.data.message);
@@ -59,37 +64,87 @@ function SignUp() {
     };
 
     return (
-        <div>
-            <h2>Sign Up</h2>
+        <div
+        className="custom-modal modal show"
+        style={{ display: 'block', position: 'initial', color: '#DB7093' }}
+    >
+        <Modal.Dialog >
+            <Modal.Header closeButton style={{ backgroundColor: '#ffffff' }}>
+                <Modal.Title style={{ backgroundColor: '#ffffff', color: '#DB7093' }}>Sign Up</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body style={{ backgroundColor: '#ffffff' }}>
             {signupSuccess ? (
                 <p>Sign up successful! You are now logged in. Redirecting to your user profile..</p>
-            ) : (
-                <form onSubmit={handleSignup}>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={email}
+                ) : (
+            <Form onClick={handleSignup}>
+            <Row className="align-items-center">
+                <Col style={{ backgroundColor: '#ffffff' }}>
+                    <Form.Group style={{ backgroundColor: '#ffffff' }} className="mb-3" controlId="formBasicEmail">
+                        <Form.Label style={{ backgroundColor: '#ffffff' }}>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                    </div>
-                    <div>
-                        <label>Password:</label>
-                        <input
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    {error && <p style={{ color: "red" }}>{error}</p>}
-                    <button type="submit">Sign Up</button>
-                    <br></br>
-                    <button onClick={toggleForm}>Switch to {showSignUp ? 'Sign Up' : 'Login'}</button>
-                </form>
-            )}
-        </div>
+                        <Form.Text className="text-muted" style={{ backgroundColor: '#ffffff' }}>
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{ backgroundColor: '#ffffff' }}>
+                    <Form.Group style={{ backgroundColor: '#ffffff' }} className="mb-3" controlId="formBasicPassword">
+                        <Form.Label style={{ backgroundColor: '#ffffff' }}>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" value={password}
+                            onChange={(e) => setPassword(e.target.value)}/>
+                    </Form.Group>
+                </Col>
+            </Row>
+        </Form>
+        )}
+            </Modal.Body>
+
+            <Modal.Footer style={{ padding: '0px', backgroundColor: '#ffffff'  }}>
+                    <Button onClick={handleSignup} style={{ backgroundColor: '#DB7093'  }} variant="secondary" type="submit">Sign Up</Button>
+                    <div></div>
+                    <Button variant="secondary" onClick={toggleForm}>Switch to {showSignUp ? 'Sign Up' : 'Login'}
+                    </Button>
+            </Modal.Footer>
+        </Modal.Dialog>
+    </div>
+
+
+        // <div>
+        //     <h2>Sign Up</h2>
+        //     {signupSuccess ? (
+        //         <p>Sign up successful! You are now logged in. Redirecting to your user profile..</p>
+        //     ) : (
+        //         <form onSubmit={handleSignup}>
+        //             <div>
+        //                 <label>Email:</label>
+        //                 <input
+        //                     type="email"
+        //                     placeholder="Enter your email"
+        //                     value={email}
+        //                     onChange={(e) => setEmail(e.target.value)}
+        //                 />
+        //             </div>
+        //             <div>
+        //                 <label>Password:</label>
+        //                 <input
+        //                     type="password"
+        //                     placeholder="Enter your password"
+        //                     value={password}
+        //                     onChange={(e) => setPassword(e.target.value)}
+        //                 />
+        //             </div>
+        //             {error && <p style={{ color: "red" }}>{error}</p>}
+        //             <button type="submit">Sign Up</button>
+        //             <br></br>
+        //             <button onClick={toggleForm}>Switch to {showSignUp ? 'Sign Up' : 'Login'}</button>
+        //         </form>
+        //     )}
+        // </div>
     );
 }
 

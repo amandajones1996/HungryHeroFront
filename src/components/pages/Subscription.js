@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../features/authSlice";
 import { selectRestaurant } from '../../features/restaurantSlice';
 import { useNavigate } from 'react-router-dom';
+import Accordion from 'react-bootstrap/Accordion';
 
 
 
@@ -111,13 +112,13 @@ const Subscription = () => {
         try {
             let amount = 0;
             switch (selectedFrequency) {
-            case 'weekly':
+            case 'Weekly':
                 amount = 50;
                 break;
-            case 'biweekly':
+            case 'Biweekly':
                 amount = 50;
                 break;
-            case 'monthly':
+            case 'Monthly':
                 amount = 50;
                 break;
             default:
@@ -177,37 +178,46 @@ const Subscription = () => {
 
 
     return (
-        <div>
-            hello
-        <h2>Subscribe to a Plan</h2>
+        <Accordion  defaultActiveKey="0" style={{ width: "40vw", padding: "50px", color: '#DB7093' }}>
+        <Accordion.Item eventKey="0">
+            <div style={{ background: '#DB7093', color: '#DB7093', margin: "0" }}>
+            <Accordion.Header style={{ background: '#DB7093', color: '#DB7093', margin: "0" }}>Subscribe</Accordion.Header>
+            </div>
+            <Accordion.Body  style={{ backgroundColor: '#ffffff' }}>
         {subscriptionResponse && <p>{subscriptionResponse}</p>}
-        <form onSubmit={handleSubmit}>
-            <p>Selected Price: {priceMapping[selectedFrequency]}</p>
+        <form onSubmit={handleSubmit} style={{ backgroundColor: '#ffffff', color:'#DB7093' }}>
+            <p style={{ backgroundColor: '#ffffff' }}>Cost {selectedFrequency}: {priceMapping[selectedFrequency]}</p>
             <select
             id="frequency"
             value={selectedFrequency}
             onChange={(e) => setSelectedFrequency(e.target.value)}
+            style={{ backgroundColor: '#DB7093', color:'#ffffff' }}
             >
                 <option value="weekly">Weekly</option>
                 <option value="biweekly">Biweekly</option>
                 <option value="monthly">Monthly</option>
             </select>
             <br />
-            <div>
-            <label>Name:</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            <div style={{ backgroundColor: '#ffffff', color:'#DB7093'}}>
+            <label style={{ backgroundColor: '#ffffff' }}>Name:</label>
+            <input style={{ backgroundColor: '#ffffff' }} type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter Your Name'/>
             </div>
-            <div>
-            <label>Email:</label>
+            <div style={{ backgroundColor: '#ffffff' }}>
+            <label style={{ backgroundColor: '#ffffff' }}>Email:</label>
             <input
                 type="email"
                 value={email || (user && user.email ? user.email : '')}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{ backgroundColor: '#ffffff' }}
+                placeholder='Enter Your Email'
             />
             </div>
-            <button type="submit">Subscribe</button>
+            <br></br>
+            <button style={{ backgroundColor:'#DB7093', color: '#ffffff', border: "10"}} type="submit">Subscribe</button>
         </form>
-        </div>
+        </Accordion.Body>
+        </Accordion.Item>
+        </Accordion>
     );
 };
 

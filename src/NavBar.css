@@ -50,9 +50,9 @@
 /* } */
 
 
-.bg-body-tertiary {
+/* .custom-navbar {
     max-width: fit-content;
-    padding: 0%;
-}
-
-
+    padding: 0% !important;
+    background: transparent !important;
+    background-color: rgb(227, 115, 131) !important;
+} */

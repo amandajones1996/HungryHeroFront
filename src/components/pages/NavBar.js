@@ -33,12 +33,12 @@ function NavBar() {
 
 
     return (
-        <Navbar  expand="lg" className="bg-body-tertiary">
-            <Container>
+        <Navbar  expand="lg" style={{ width: "100vw", padding: '0', margin: "0", justifyContent: "center" }} >
+            <Container style={{ width: "100%", padding: "0", margin: "0"}}>
                 <Navbar.Brand href="#home" as={Link} to="/">Hungry Hero</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto" >
+                    <Nav className="w-100 justify-content-between">
                         <Nav.Link href="#home" as={Link} to="/subscriptionsbenefits">Explore our Subscriptions</Nav.Link>
                         {/* <Nav.Link href="#link">Link</Nav.Link> */}
                         <NavDropdown id="basic-nav-dropdown" title="Become a Member">
@@ -51,8 +51,8 @@ function NavBar() {
                                 </>
                             ) : (
                                 <>
-                                    <NavDropdown.Item href="#action/3.1" as={Link} to="/login">Log In</NavDropdown.Item>
-                                    <NavDropdown.Item href="#action/3.2" as={Link} to="/signup">
+                                    <NavDropdown.Item style={{ color: '#DB7093' }} href="#action/3.1" as={Link} to="/login">Log In</NavDropdown.Item>
+                                    <NavDropdown.Item style={{ color: '#DB7093' }} href="#action/3.2" as={Link} to="/signup">
                                     Sign Up
                                     </NavDropdown.Item>
                                     {/* <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}

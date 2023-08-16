@@ -7,7 +7,7 @@ function SubscriptionsBenefits() {
             <div className="subscription-benefits">
                 <h2>How It Works</h2>
             <div className="benefit">
-                {/* <img src="../../../src/images/box.png" alt='calender' /> */}
+                <img src={require('../../images/box.jpg.png')} alt='calender' />
                 <h3>CHANGE ANYTIME</h3>
                 <p>Adjust to meet your schedule—skip, change, cancel, or pause your shipments anytime.</p>
             </div>

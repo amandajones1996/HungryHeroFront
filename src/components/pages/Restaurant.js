@@ -5,6 +5,7 @@ import "../../Restaurant.css"
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { loadRestaurant, getRestaurantData } from "../../features/restaurantSlice";
+import Image from 'react-bootstrap/Image';
 
 
 function Restaurant() {
@@ -45,17 +46,21 @@ function Restaurant() {
 
     return (
         <div>
-            <h1>{restaurant.name}</h1>
+            <div>
+                <Image src={require(`../../images/${restaurant.img2}`)}
+                    alt={`Attraction in ${restaurant.location}`} style={{ width: "900px", height: "350px", padding: "50px", justifyContent: "center" }}/>
+            </div>
+            <h1 style={{ color: '#DB7093' }}>{restaurant.name}</h1>
             <p>{restaurant.description}</p>
             <p>{restaurant.location}</p>
+            <Subscription />
             {/* <p>{restaurant.contact}</p> */}
-            <h2>What You'll Get</h2>
+            <h2 style={{ color: '#DB7093' }}>What You'll Get</h2>
             <ul>
             {restaurant.menu.map((menuItem, index) => (
                 <li key={index}>{menuItem}</li>
             ))}
             </ul>
-            <Subscription />
         </div>
     )
 }

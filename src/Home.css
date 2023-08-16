@@ -12,10 +12,20 @@
     align-items: center;
     justify-content: center;
     color: rgb(227, 115, 131);
+    background-color: rgb(255, 245, 238);
+    padding: 30px;
+    border: 8px;
+    margin: 0px;
+    font-variant: small-caps;
+    font-weight: 600;
 }
 
 .homeContainer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#motto {
+    font-weight: 100;
 }

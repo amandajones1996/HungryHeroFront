@@ -3,6 +3,11 @@ import { useDispatch } from "react-redux";
 import { login } from "../../features/authSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
 
 function Login() {
     const dispatch = useDispatch();
@@ -62,31 +67,48 @@ function Login() {
     
 
     return (
-    <div>
-        <h2>Login Page</h2>
-        <form onSubmit={handleLogin}>
-        <div>
-            <label>Email:</label>
-            <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-        <div>
-            <label>Password:</label>
-            <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            />
-        </div>
-        <button onClick={handleLogin} type="submit">Login</button>
-        <br></br>
-        <button onClick={toggleForm}>Switch to {showSignUp ? 'Login' : 'Sign Up'}</button>
-        </form>
+    <div
+        className="custom-modal modal show"
+        style={{ display: 'block', position: 'initial', color: '#DB7093' }}
+    >
+        <Modal.Dialog >
+            <Modal.Header closeButton style={{ backgroundColor: '#ffffff' }}>
+                <Modal.Title style={{ backgroundColor: '#ffffff', color: '#DB7093' }}>Log In</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body style={{ backgroundColor: '#ffffff' }}>
+            <Form onSubmit={handleLogin}>
+            <Row className="align-items-center">
+                <Col style={{ backgroundColor: '#ffffff' }}>
+                    <Form.Group style={{ backgroundColor: '#ffffff' }} className="mb-3" controlId="formBasicEmail">
+                        <Form.Label style={{ backgroundColor: '#ffffff' }}>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" value={email}
+                            onChange={(e) => setEmail(e.target.value)}/>
+                        <Form.Text className="text-muted" style={{ backgroundColor: '#ffffff' }}>
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{ backgroundColor: '#ffffff' }}>
+                    <Form.Group style={{ backgroundColor: '#ffffff' }} className="mb-3" controlId="formBasicPassword">
+                        <Form.Label style={{ backgroundColor: '#ffffff' }}>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" value={password}
+                            onChange={(e) => setPassword(e.target.value)}/>
+                    </Form.Group>
+                </Col>
+            </Row>
+        </Form>
+            </Modal.Body>
+
+            <Modal.Footer style={{ padding: '0px', backgroundColor: '#ffffff'  }}>
+                    <Button  style={{ padding: '10px', margin: "0", backgroundColor: '#DB7093'  }} variant="secondary" type="submit" onClick={handleLogin}>Submit</Button>
+                    <div></div>
+                    <Button variant="secondary" onClick={toggleForm}>Switch to {showSignUp ? 'Login' : 'Sign Up'}
+                    </Button>
+            </Modal.Footer>
+        </Modal.Dialog>
     </div>
     );
 }
